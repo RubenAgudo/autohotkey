@@ -59,12 +59,13 @@ return
 
 ; start local jetty
 ^!F2::
-	SendInput, ./mvn-jetty.bat;
+	SendInput, set MAVEN_OPTS=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000 -Djetty.port=9090 -XX:MaxPermSize=1024m -XX:PermSize=1024m {Enter}
+	SendInput, mvn   -Dlocalds -P jetty -Djetty.port=9090 jetty:run {Enter}
 	Return
 
 ; mvn install skipping test
 ^!F3::
-	SendInput, mvn install -DskipTests;
+	SendInput, mvn install -DskipTests {Enter};
 	Return
 
 ; mvn bump version
