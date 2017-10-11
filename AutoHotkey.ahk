@@ -53,6 +53,21 @@ return
 	Return
 
 ; alt + F1: merge master onto current branch
-!F1::
+^!F1::
 	SendInput, git fetch origin master && git merge FETCH_HEAD;
+	Return
+
+; start local jetty
+^!F2::
+	SendInput, ./mvn-jetty.bat;
+	Return
+
+; mvn install skipping test
+^!F3::
+	SendInput, mvn install -DskipTests;
+	Return
+
+; mvn bump version
+^!F4::
+	SendInput, mvn -U org.codehaus.mojo:versions-maven-plugin:1.1:set -DnewVersion=
 	Return
